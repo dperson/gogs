@@ -5,14 +5,14 @@ MAINTAINER David Personette <dperson@dperson.com>
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     export URL='https://github.com/gogits/gogs/releases/download' && \
     export version='0.6.1' && \
-    export sha1sum='d43e039adcea43e1808229b9d55f3eaee6a5edb9' && \
+    export sha256sum='ab4d8341d1c14e753914b68b3ec0c9b169c361123dcef541ff34' && \
     groupadd -r gogs && useradd -r -d /opt/gogs -m -g gogs gogs && \
     apt-get update -qq && \
     apt-get install -qqy --no-install-recommends ca-certificates curl unzip \
                 dropbear \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     curl -LOC- -s $URL/v$version/linux_amd64.zip && \
-    sha1sum linux_amd64.zip | grep -q "$sha1sum" && \
+    sha256sum linux_amd64.zip | grep -q "$sha256sum" && \
     unzip -qq linux_amd64.zip -C /opt && \
     mkdir /opt/gogs/custom && \
     echo -e 'RUN_MODE = prod\n\n[repository]' > /opt/gogs/custom/app.ini && \
