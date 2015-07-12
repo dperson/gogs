@@ -13,7 +13,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     curl -LOC- -s $URL/v$version/linux_amd64.zip && \
     sha256sum linux_amd64.zip | grep -q "$sha256sum" && \
-    unzip -qq linux_amd64.zip -C /opt && \
+    (cd /opt; unzip -qq linux_amd64.zip) && \
     mkdir /opt/gogs/custom && \
     echo -e 'RUN_MODE = prod\n\n[repository]' > /opt/gogs/custom/app.ini && \
     echo -e 'ROOT = /opt/gogs/repositories\n' >> /opt/gogs/custom/app.ini && \
