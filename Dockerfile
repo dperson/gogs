@@ -6,7 +6,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     export URL='https://github.com/gogits/gogs/releases/download' && \
     export version='0.6.1' && \
     export sha256sum='ab4d8341d1c14e753914b68b3ec0c9b169c361123dcef541ff34' && \
-    groupadd -r gogs && useradd -r -d /opt/gogs -m -g gogs gogs && \
+    groupadd -r gogs && useradd -r -d /opt/gogs -g gogs gogs && \
     apt-get update -qq && \
     apt-get install -qqy --no-install-recommends ca-certificates curl unzip \
                 dropbear \
