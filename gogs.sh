@@ -72,6 +72,6 @@ elif ps -ef | egrep -v 'grep|gogs.sh' | grep -q gogs; then
     echo "Service already running, please restart container to apply changes"
 else
     ps -ef | egrep -v grep | grep -q dropbear || dropbear -E -p 2222
-    exec su -- - ${GOGSUSER:-gogs} -s /bin/bash -c \
+    exec su -l ${GOGSUSER:-gogs} -s /bin/bash -c \
                 "cd /opt/gogs/git; exec /opt/gogs/gogs -- web"
 fi
