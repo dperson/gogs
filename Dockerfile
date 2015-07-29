@@ -11,6 +11,9 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get install -qqy --no-install-recommends ca-certificates curl unzip \
                 dropbear \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
+    dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key && \
+    dropbearkey -t rsa -f -s 4096 /etc/dropbear/dropbear_rsa_host_key && \
+    dropbearkey -t ecdsa -s 521 -f /etc/dropbear/dropbear_ecdsa_host_key && \
     curl -LOC- -s $URL/v$version/linux_amd64.zip && \
     sha256sum linux_amd64.zip | grep -q "$sha256sum" && \
     (cd /opt; unzip -qq /linux_amd64.zip) && \

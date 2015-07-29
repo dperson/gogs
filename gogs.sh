@@ -69,5 +69,7 @@ elif [[ $# -ge 1 ]]; then
 elif ps -ef | egrep -v grep | grep -q gogs; then
     echo "Service already running, please restart container to apply changes"
 else
-    su -l ${GOGSUSER:-gogs} -s /bin/bash -c "exec /opt/gogs/scripts/start.sh"
+    dropbear -E -p 2222
+    exec su -l ${GOGSUSER:-gogs} -s /bin/bash -c \
+                "exec /opt/gogs/scripts/start.sh"
 fi
