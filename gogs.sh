@@ -66,7 +66,7 @@ if [[ $# -ge 1 && -x $(which $1 2>&-) ]]; then
 elif [[ $# -ge 1 ]]; then
     echo "ERROR: command not found: $1"
     exit 13
-elif ps -ef | egrep -v grep | grep -q gogs; then
+elif ps -ef | egrep -v 'grep|gogs.sh' | grep -q gogs; then
     echo "Service already running, please restart container to apply changes"
 else
     dropbear -E -p 2222
