@@ -38,7 +38,7 @@ COPY gogs.sh /usr/bin/
 
 EXPOSE 2222 3000
 
-VOLUME ["/etc/dropbear", "/opt/gogs/custom", "/opt/gogs/data",
+VOLUME ["/etc/dropbear", "/opt/gogs/custom", "/opt/gogs/data", \
             "/opt/gogs/repositories"]
 
 ENTRYPOINT ["gogs.sh"]
