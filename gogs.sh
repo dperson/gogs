@@ -60,7 +60,7 @@ done
 shift $(( OPTIND - 1 ))
 
 [[ "${TIMEZONE:-""}" ]] && timezone "$TIMEZONE"
-[[ -d /opt/gogs/git ]] || mkdir -p /opt/gogs/git
+
 chown -Rh gogs. /opt/gogs
 
 if [[ $# -ge 1 && -x $(which $1 2>&-) ]]; then
