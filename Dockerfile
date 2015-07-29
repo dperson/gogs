@@ -15,12 +15,12 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     sha256sum linux_amd64.zip | grep -q "$sha256sum" && \
     (cd /opt; unzip -qq /linux_amd64.zip) && \
     mkdir -p /opt/gogs/custom || : && \
-    echo -e 'RUN_MODE = prod\n\n[repository]' > /opt/gogs/custom/app.ini && \
-    echo -e 'ROOT = /opt/gogs/repositories\n' >> /opt/gogs/custom/app.ini && \
-    echo -e '[database]\n; Either "mysql", "postgres", or "sqlite3"' >> \
+    /bin/echo -e 'RUN_MODE = prod\n\n[repository]' >/opt/gogs/custom/app.ini &&\
+    /bin/echo -e 'ROOT = /opt/gogs/repositories\n' >>/opt/gogs/custom/app.ini&&\
+    /bin/echo -e '[database]\n; Either "mysql", "postgres", or "sqlite3"' >> \
                 /opt/gogs/custom/app.ini && \
-    echo -e 'DB_TYPE = sqlite3' >> /opt/gogs/custom/app.ini && \
-    echo -e 'PATH = data/gogs.db' >> /opt/gogs/custom/app.ini && \
+    /bin/echo -e 'DB_TYPE = sqlite3' >> /opt/gogs/custom/app.ini && \
+    /bin/echo -e 'PATH = data/gogs.db' >> /opt/gogs/custom/app.ini && \
     chown -Rh gogs. /opt/gogs && \
     apt-get purge -qqy ca-certificates curl unzip && \
     apt-get autoremove -qqy && apt-get clean -qqy && \
