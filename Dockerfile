@@ -11,6 +11,8 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get install -qqy --no-install-recommends ca-certificates curl unzip \
                 dropbear \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
+    for i in dss rsa ecdsa; do rm -f /etc/dropbear/dropbear_${i}_host_key || :;\
+                done && \
     dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key && \
     dropbearkey -t rsa -f -s 4096 /etc/dropbear/dropbear_rsa_host_key && \
     dropbearkey -t ecdsa -s 521 -f /etc/dropbear/dropbear_ecdsa_host_key && \
