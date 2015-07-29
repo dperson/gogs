@@ -60,6 +60,8 @@ done
 shift $(( OPTIND - 1 ))
 
 [[ "${TIMEZONE:-""}" ]] && timezone "$TIMEZONE"
+[[ -d /opt/gogs/git ]] || mkdir -p /opt/gogs/git
+chown -Rh gogs. /opt/gogs
 
 if [[ $# -ge 1 && -x $(which $1 2>&-) ]]; then
     exec "$@"
@@ -70,6 +72,6 @@ elif ps -ef | egrep -v 'grep|gogs.sh' | grep -q gogs; then
     echo "Service already running, please restart container to apply changes"
 else
     ps -ef | egrep -v grep | grep -q dropbear || dropbear -E -p 2222
-    exec su -l ${GOGSUSER:-gogs} -s /bin/bash -c \
-                "exec /opt/gogs/scripts/start.sh"
+    exec su -- - ${GOGSUSER:-gogs} -s /bin/bash -c \
+                "cd /opt/gogs/git; exec /opt/gogs/gogs -- web"
 fi
