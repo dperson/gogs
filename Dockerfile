@@ -6,7 +6,8 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     export URL='https://github.com/gogits/gogs/releases/download' && \
     export version='0.6.1' && \
     export sha256sum='ab4d8341d1c14e753914b68b3ec0c9b169c361123dcef541ff34' && \
-    groupadd -r gogs && useradd -r -d /opt/gogs -c 'Gogs' -m -g gogs gogs && \
+    groupadd -r gogs && \
+    useradd -r -d /opt/gogs/home -c 'Gogs' -m -g gogs gogs && \
     apt-get update -qq && \
     apt-get install -qqy --no-install-recommends ca-certificates curl unzip \
                 dropbear git \
@@ -38,7 +39,7 @@ COPY gogs.sh /usr/bin/
 
 EXPOSE 2222 3000
 
-VOLUME ["/etc/dropbear", "/opt/gogs/.ssh", "/opt/gogs/custom", \
+VOLUME ["/etc/dropbear", "/opt/gogs/home", "/opt/gogs/custom", \
             "/opt/gogs/data", "/opt/gogs/log", "/opt/gogs/repositories"]
 
 ENTRYPOINT ["gogs.sh"]
