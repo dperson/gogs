@@ -6,6 +6,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     export URL='https://github.com/gogits/gogs/releases/download' && \
     export version='0.6.1' && \
     export sha256sum='ab4d8341d1c14e753914b68b3ec0c9b169c361123dcef541ff34' && \
+    mkdir -p /opt/gogs/custom/conf /opt/gogs/repositories || : && \
     groupadd -r gogs && \
     useradd -r -d /opt/gogs/home -c 'Gogs' -m -g gogs gogs && \
     apt-get update -qq && \
@@ -20,7 +21,6 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     curl -LOC- -s $URL/v$version/linux_amd64.zip && \
     sha256sum linux_amd64.zip | grep -q "$sha256sum" && \
     (cd /opt; unzip -qq /linux_amd64.zip) && \
-    mkdir -p /opt/gogs/custom/conf /opt/gogs/repositories || : && \
     /bin/echo -e 'RUN_MODE = prod\nRUN_USER = gogs\n\n[repository]' > \
                 /opt/gogs/custom/conf/app.ini && \
     /bin/echo -e 'ROOT = /opt/gogs/repositories\n' >> \
