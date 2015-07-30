@@ -61,7 +61,7 @@ shift $(( OPTIND - 1 ))
 
 [[ "${TIMEZONE:-""}" ]] && timezone "$TIMEZONE"
 
-chown -Rh gogs. /opt/gogs
+chown -Rh gogs. /opt/gogs 2>&1 | grep -iv 'Read-only' || :
 
 if [[ $# -ge 1 && -x $(which $1 2>&-) ]]; then
     exec "$@"
