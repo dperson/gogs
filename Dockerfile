@@ -9,7 +9,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     groupadd -r gogs && useradd -r -d /opt/gogs -c 'Gogs' -m -g gogs gogs && \
     apt-get update -qq && \
     apt-get install -qqy --no-install-recommends ca-certificates curl unzip \
-                dropbear \
+                dropbear git \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     for i in dss rsa ecdsa; do rm -f /etc/dropbear/dropbear_${i}_host_key || :;\
                 done && \
