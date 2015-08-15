@@ -39,7 +39,7 @@ OR set local storage:
 
 ENVIROMENT VARIABLES (only available with `docker run`)
 
- * `TIMEZONE` - As above, set a zoneinfo timezone, IE `EST5EDT`
+ * `TZ` - As above, set a zoneinfo timezone, IE `EST5EDT`
 
 ## Examples
 
@@ -48,7 +48,13 @@ ENVIROMENT VARIABLES (only available with `docker run`)
 Any of the commands can be run at creation with `docker run` or later with
 `docker exec gogs.sh` (as of version 1.3 of docker).
 
+### Setting the Timezone
+
     sudo docker run -p 139:139 -p 445:445 -d dperson/gogs -t EST5EDT
+
+OR using `environment variables`
+
+    sudo docker run -p 139:139 -p 445:445 -e TZ=EST5EDT -d dperson/gogs
 
 Will get you the same settings as
 
