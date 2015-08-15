@@ -1,4 +1,4 @@
-[![logo](http://gogs.io/imgs/gogs-lg.png)](http://gogs.io/)
+[![logo](https://raw.githubusercontent.com/dperson/gogs/master/logo.png)](http://gogs.io/)
 
 # Gogs (Go Git Service)
 
