@@ -64,6 +64,8 @@ done
 shift $(( OPTIND - 1 ))
 
 [[ "${TZ:-""}" ]] && timezone "$TZ"
+[[ "${USERID:-""}" =~ ^[0-9]+$ ]] && usermod -u $USERID gogs
+[[ "${GROUPID:-""}" =~ ^[0-9]+$ ]] && usermod -g $GROUPID gogs
 
 chown -Rh gogs. /opt/gogs 2>&1 | grep -iv 'Read-only' || :
 
