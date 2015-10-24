@@ -21,16 +21,16 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     curl -LOC- -s $URL/v$version/linux_amd64.zip && \
     sha256sum linux_amd64.zip | grep -q "$sha256sum" && \
     (cd /opt; unzip -qq /linux_amd64.zip) && \
-    /bin/echo -e 'RUN_MODE = prod\nRUN_USER = gogs\n\n[repository]' > \
-                /opt/gogs/custom/conf/app.ini && \
-    /bin/echo -e 'ROOT = /opt/gogs/repositories\n' >> \
-                /opt/gogs/custom/conf/app.ini && \
-    /bin/echo -e '[server]\nSSH_PORT = 2222\n' >> \
-                /opt/gogs/custom/conf/app.ini && \
-    /bin/echo -e '[database]\n; Either "mysql", "postgres", or "sqlite3"' >> \
-                /opt/gogs/custom/conf/app.ini && \
-    /bin/echo -e 'DB_TYPE = sqlite3\nPATH = data/gogs.db' >> \
-                /opt/gogs/custom/conf/app.ini && \
+    /bin/echo -e 'RUN_MODE = prod\nRUN_USER = gogs\n\n[repository]' \
+                >/opt/gogs/custom/conf/app.ini && \
+    /bin/echo -e 'ROOT = /opt/gogs/repositories\n' \
+                >>/opt/gogs/custom/conf/app.ini && \
+    /bin/echo -e '[server]\nSSH_PORT = 2222\n' \
+                >>/opt/gogs/custom/conf/app.ini && \
+    /bin/echo -e '[database]\n; Either "mysql", "postgres", or "sqlite3"' \
+                >>/opt/gogs/custom/conf/app.ini && \
+    /bin/echo -e 'DB_TYPE = sqlite3\nPATH = data/gogs.db' \
+                >>/opt/gogs/custom/conf/app.ini && \
     chown -Rh gogs. /opt/gogs && \
     apt-get purge -qqy ca-certificates curl unzip && \
     apt-get autoremove -qqy && apt-get clean -qqy && \
