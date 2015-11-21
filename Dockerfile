@@ -19,7 +19,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     dropbearkey -t ecdsa -s 521 -f /etc/dropbear/dropbear_ecdsa_host_key && \
     curl -LOC- -s "https://dl.gogs.io/gogs_v${version}_linux_amd64.tar.gz" && \
     sha256sum gogs_v${version}_linux_amd64.tar.gz | grep -q "$sha256sum" && \
-    (cd /opt; tar xf gogs_v${version}_linux_amd64.tar.gz) && \
+    (cd /opt; tar xf /gogs_v${version}_linux_amd64.tar.gz) && \
     /bin/echo -e 'RUN_MODE = prod\nRUN_USER = gogs\n\n[repository]' \
                 >/opt/gogs/custom/conf/app.ini && \
     /bin/echo -e 'ROOT = /opt/gogs/repositories\n' \
