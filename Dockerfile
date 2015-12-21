@@ -4,7 +4,7 @@ MAINTAINER David Personette <dperson@dperson.com>
 # Install gogs
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     export version='0.8.10' && \
-    export sha256sum='4a0b6ed2c936225af71596c162621d3887301407ab0392dee573' && \
+    export sha256sum='35196120f08f8d0b32e7a15a8651f78ded96f7563a6cb3c9b17a' && \
     mkdir -p /opt/gogs/custom/conf /opt/gogs/repositories || : && \
     groupadd -r gogs && \
     useradd -r -d /opt/gogs/home -c 'Gogs' -m -g gogs gogs && \
@@ -17,7 +17,8 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key && \
     dropbearkey -t rsa -s 4096 -f /etc/dropbear/dropbear_rsa_host_key && \
     dropbearkey -t ecdsa -s 521 -f /etc/dropbear/dropbear_ecdsa_host_key && \
-    curl -LOC- "https://dl.gogs.io/gogs_v${version}_linux_amd64.tar.gz" && \
+    echo "downloading: gogs_v${version}_linux_amd64.tar.gz" && \
+    curl -LOC- -s "https://dl.gogs.io/gogs_v${version}_linux_amd64.tar.gz" && \
     sha256sum gogs_v${version}_linux_amd64.tar.gz | grep -q "$sha256sum" && \
     (cd /opt; tar xf /gogs_v${version}_linux_amd64.tar.gz) && \
     /bin/echo -e 'RUN_MODE = prod\nRUN_USER = gogs\n\n[repository]' \
