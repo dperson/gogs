@@ -18,11 +18,11 @@ Once it's up connect to configure Gogs.
 
 ## Hosting a Gogs instance
 
-    sudo docker run -p 80:3000 -p 2222:2222 -d dperson/gogs
+    sudo docker run -it -p 80:3000 -p 2222:2222 -d dperson/gogs
 
 OR set local storage:
 
-    sudo docker run --name gogs -p 80:3000 -p 2222:2222 \
+    sudo docker run -it --name gogs -p 80:3000 -p 2222:2222 \
                 -v /path/to/directory:/mount \
                 -d dperson/gogs
 
@@ -48,20 +48,20 @@ ENVIRONMENT VARIABLES (only available with `docker run`)
 ### Start an instance and set the timezone:
 
 Any of the commands can be run at creation with `docker run` or later with
-`docker exec gogs.sh` (as of version 1.3 of docker).
+`docker exec -it gogs.sh` (as of version 1.3 of docker).
 
 ### Setting the Timezone
 
-    sudo docker run -p 139:139 -p 445:445 -d dperson/gogs -t EST5EDT
+    sudo docker run -it -p 139:139 -p 445:445 -d dperson/gogs -t EST5EDT
 
 OR using `environment variables`
 
-    sudo docker run -p 139:139 -p 445:445 -e TZ=EST5EDT -d dperson/gogs
+    sudo docker run -it -p 139:139 -p 445:445 -e TZ=EST5EDT -d dperson/gogs
 
 Will get you the same settings as
 
-    sudo docker run --name gogs -p 139:139 -p 445:445 -d dperson/gogs
-    sudo docker exec gogs gogs.sh -t EST5EDT ls -AlF /etc/localtime
+    sudo docker run -it --name gogs -p 139:139 -p 445:445 -d dperson/gogs
+    sudo docker exec -it gogs gogs.sh -t EST5EDT ls -AlF /etc/localtime
     sudo docker restart gogs
 
 # User Feedback
