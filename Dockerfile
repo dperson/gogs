@@ -7,7 +7,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     export sha256sum='5c9adfe3e170cd0abfd687fc4730a214cecf3c778400c231fcba' && \
     mkdir -p /opt/gogs/custom/conf /opt/gogs/repositories || : && \
     groupadd -r gogs && \
-    useradd -r -d /opt/gogs/home -c 'Gogs' -m -g gogs gogs && \
+    useradd -c 'Gogs' -d /opt/gogs/home -g gogs -m -r gogs && \
     apt-get update -qq && \
     apt-get install -qqy --no-install-recommends ca-certificates curl dropbear \
                 git openssh-client \
