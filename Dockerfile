@@ -3,8 +3,8 @@ MAINTAINER David Personette <dperson@gmail.com>
 
 # Install gogs
 RUN export DEBIAN_FRONTEND='noninteractive' && \
-    export version='0.9.60' && \
-    export sha256sum='74e9d9a479671ce44e662e8e38ccbd1a580b35ac1e7afc9cb5ec' && \
+    export version='0.9.71' && \
+    export sha256sum='341d131853a2225b7520a76d09c3598646ccaf879534f4820c44' && \
     { mkdir -p /opt/gogs/custom/conf /opt/gogs/repositories || :; } && \
     groupadd -r gogs && \
     useradd -c 'Gogs' -d /opt/gogs/home -g gogs -m -r gogs && \
