@@ -16,7 +16,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 done && \
     echo "downloading: linux_amd64.tar.gz" && \
     curl -LOsC- "https://cdn.gogs.io/0.${version}/linux_amd64.tar.gz" && \
-    ls -AlF linux_amd64.tar.gz && sha256sum linux_amd64.tar.gz &&
+    ls -AlF linux_amd64.tar.gz && sha256sum linux_amd64.tar.gz && \
     sha256sum linux_amd64.tar.gz | grep -q "$sha256sum" && \
     (cd /opt; tar xf /linux_amd64.tar.gz) && \
     /bin/echo -e 'RUN_MODE = prod\nRUN_USER = gogs\n\n[repository]' \
