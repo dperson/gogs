@@ -4,7 +4,7 @@ MAINTAINER David Personette <dperson@gmail.com>
 # Install gogs
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     export version='0.10rc' && \
-    export sha256sum='6a4d529b779f486ec4ae7b1a0bf50be8f7e9f892b4eeb03f4c87' && \
+    export sha256sum='107105457f4bbdbb746449d2cf86a122785442173faca62eb01a' && \
     { mkdir -p /opt/gogs/custom/conf /opt/gogs/repositories || :; } && \
     groupadd -r gogs && \
     useradd -c 'Gogs' -d /opt/gogs/home -g gogs -m -r gogs && \
@@ -18,7 +18,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     dropbearkey -t rsa -s 4096 -f /etc/dropbear/dropbear_rsa_host_key && \
     dropbearkey -t ecdsa -s 521 -f /etc/dropbear/dropbear_ecdsa_host_key && \
     echo "downloading: linux_amd64.tar.gz" && \
-    curl -LOC- -s "https://dl.gogs.io/0.${version}/linux_amd64.tar.gz" && \
+    curl -LOC- -s "https://cdn.gogs.io/0.${version}/linux_amd64.tar.gz" && \
     sha256sum linux_amd64.tar.gz | grep -q "$sha256sum" && \
     (cd /opt; tar xf /linux_amd64.tar.gz) && \
     /bin/echo -e 'RUN_MODE = prod\nRUN_USER = gogs\n\n[repository]' \
