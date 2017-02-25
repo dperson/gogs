@@ -14,12 +14,11 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     for i in dss rsa ecdsa; do rm -f /etc/dropbear/dropbear_${i}_host_key || :;\
                 done && \
-    dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key && \
-    dropbearkey -t rsa -s 4096 -f /etc/dropbear/dropbear_rsa_host_key && \
-    dropbearkey -t ecdsa -s 521 -f /etc/dropbear/dropbear_ecdsa_host_key && \
     echo "downloading: linux_amd64.tar.gz" && \
     curl -LOC- -s "https://cdn.gogs.io/0.${version}/linux_amd64.tar.gz" && \
+    set -x && \
     sha256sum linux_amd64.tar.gz | grep -q "$sha256sum" && \
+    set +x && \
     (cd /opt; tar xf /linux_amd64.tar.gz) && \
     /bin/echo -e 'RUN_MODE = prod\nRUN_USER = gogs\n\n[repository]' \
                 >/opt/gogs/custom/conf/app.ini && \
