@@ -17,9 +17,9 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key && \
     dropbearkey -t rsa -s 4096 -f /etc/dropbear/dropbear_rsa_host_key && \
     dropbearkey -t ecdsa -s 521 -f /etc/dropbear/dropbear_ecdsa_host_key && \
-    echo "downloading: gogs_v${version}_linux_amd64.tar.gz" && \
+    echo "downloading: linux_amd64.tar.gz" && \
     curl -LOC- -s "https://dl.gogs.io/0.${version}/linux_amd64.tar.gz" && \
-    sha256sum gogs_v${version}_linux_amd64.tar.gz | grep -q "$sha256sum" && \
+    sha256sum linux_amd64.tar.gz | grep -q "$sha256sum" && \
     (cd /opt; tar xf /linux_amd64.tar.gz) && \
     /bin/echo -e 'RUN_MODE = prod\nRUN_USER = gogs\n\n[repository]' \
                 >/opt/gogs/custom/conf/app.ini && \
@@ -34,7 +34,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     chown -Rh gogs. /opt/gogs && \
     apt-get purge -qqy ca-certificates curl && \
     apt-get autoremove -qqy && apt-get clean -qqy && \
-    rm -rf /tmp/* /var/lib/apt/lists/* gogs_v${version}_linux_amd64.tar.gz
+    rm -rf /tmp/* /var/lib/apt/lists/* linux_amd64.tar.gz
 COPY gogs.sh /usr/bin/
 
 EXPOSE 2222 3000
