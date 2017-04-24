@@ -15,7 +15,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     for i in dss rsa ecdsa; do rm -f /etc/dropbear/dropbear_${i}_host_key || :;\
                 done && \
     echo "downloading: linux_amd64.tar.gz" && \
-    curl -LOsC- "https://cdn.gogs.io/${version}/linux_amd64.tar.gz" && \
+    curl -LOSs "https://cdn.gogs.io/${version}/linux_amd64.tar.gz" && \
     sha256sum linux_amd64.tar.gz | grep -q "$sha256sum" && \
     (cd /opt; tar xf /linux_amd64.tar.gz) && \
     /bin/echo -e 'RUN_MODE = prod\nRUN_USER = gogs\n\n[repository]' \
