@@ -18,7 +18,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     echo "downloading: $file ..." && \
     curl -LOSs "https://cdn.gogs.io/${version}/$file" && \
     sha256sum $file | grep -q "$sha256sum" || \
-    { echo "expected $sha1sum, got $(sha1sum $file)"; exit; } && \
+    { echo "expected $sha256sum, got $(sha256sum $file)"; exit 13; } && \
     (cd /opt; tar xf /$file) && \
     /bin/echo -e 'RUN_MODE = prod\nRUN_USER = gogs\n\n[repository]' \
                 >/opt/gogs/custom/conf/app.ini && \
