@@ -20,15 +20,13 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     sha256sum $file | grep -q "$sha256sum" || \
     { echo "expected $sha256sum, got $(sha256sum $file)"; exit 13; } && \
     (cd /opt; tar xf /$file) && \
-    /bin/echo -e 'RUN_MODE = prod\nRUN_USER = gogs\n\n[repository]' \
+    echo 'RUN_MODE = prod\nRUN_USER = gogs\n\n[repository]' \
                 >/opt/gogs/custom/conf/app.ini && \
-    /bin/echo -e 'ROOT = /opt/gogs/repositories\n' \
+    echo 'ROOT = /opt/gogs/repositories\n' >>/opt/gogs/custom/conf/app.ini && \
+    echo '[server]\nSSH_PORT = 2222\n' >>/opt/gogs/custom/conf/app.ini && \
+    echo '[database]\n; Either "mysql", "postgres", or "sqlite3"' \
                 >>/opt/gogs/custom/conf/app.ini && \
-    /bin/echo -e '[server]\nSSH_PORT = 2222\n' \
-                >>/opt/gogs/custom/conf/app.ini && \
-    /bin/echo -e '[database]\n; Either "mysql", "postgres", or "sqlite3"' \
-                >>/opt/gogs/custom/conf/app.ini && \
-    /bin/echo -e 'DB_TYPE = sqlite3\nPATH = data/gogs.db' \
+    echo 'DB_TYPE = sqlite3\nPATH = data/gogs.db' \
                 >>/opt/gogs/custom/conf/app.ini && \
     chown -Rh gogs. /opt/gogs && \
     apt-get purge -qqy ca-certificates curl && \
