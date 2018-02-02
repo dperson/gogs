@@ -48,7 +48,7 @@ ENVIRONMENT VARIABLES (only available with `docker run`)
 ### Start an instance and set the timezone:
 
 Any of the commands can be run at creation with `docker run` or later with
-`docker exec -it gogs.sh` (as of version 1.3 of docker).
+`docker exec -it gogs gogs.sh` (as of version 1.3 of docker).
 
 ### Setting the Timezone
 
