@@ -4,7 +4,7 @@ MAINTAINER David Personette <dperson@gmail.com>
 # Install gogs
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     export version='0.11.66' && \
-    export sha256sum='af01103fa4da64811f9139cce221c2d88063cb5d41283df79278' && \
+    export shasum='af01103fa4da64811f9139cce221c2d88063cb5d41283df79278a82' && \
     { mkdir -p /opt/gogs/custom/conf /opt/gogs/repositories || :; } && \
     groupadd -r gogs && \
     useradd -c 'Gogs' -d /opt/gogs/home -g gogs -m -r gogs && \
@@ -14,11 +14,11 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     for i in dss rsa ecdsa; do rm -f /etc/dropbear/dropbear_${i}_host_key || :;\
                 done && \
-    file="linux_amd64.tar.gz" && \
+    file="gogs_${version}_linux_amd64.tar.gz" && \
     echo "downloading: $file ..." && \
-    curl -LOSs "https://cdn.gogs.io/${version}/$file" && \
-    sha256sum $file | grep -q "$sha256sum" || \
-    { echo "expected $sha256sum, got $(sha256sum $file)"; exit 13; } && \
+    curl -LOSs "https://cdn.gogs.io/$version/$file" && \
+    sha256sum $file | grep -q "$shasum" || \
+    { echo "expected $shasum, got $(sha256sum $file)"; exit 13; } && \
     (cd /opt; tar xf /$file) && \
     echo 'RUN_MODE = prod\nRUN_USER = gogs\n\n[repository]' \
                 >/opt/gogs/custom/conf/app.ini && \
