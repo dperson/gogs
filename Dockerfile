@@ -3,8 +3,8 @@ MAINTAINER David Personette <dperson@gmail.com>
 
 # Install gogs
 RUN export DEBIAN_FRONTEND='noninteractive' && \
-    export version='0.11.86' && \
-    export shasum='01432f903e7e91aa54f7b78faf1167462da0e7b26c7f1055247a76a' && \
+    export version='0.11.91' && \
+    export shasum='56e03b8c83387a2a3ae4e3b46e8846f3b1ba785a743b33e682024ba' && \
     { mkdir -p /opt/gogs/custom/conf /opt/gogs/repositories || :; } && \
     groupadd -r gogs && \
     useradd -c 'Gogs' -d /opt/gogs/home -g gogs -m -r gogs && \
@@ -16,7 +16,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 done && \
     file="gogs_${version}_linux_amd64.tar.gz" && \
     echo "downloading: $file ..." && \
-    curl -LOSs "https://cdn.gogs.io/$version/$file" && \
+    curl -LOSs "https://dl.gogs.io/$version/$file" && \
     sha256sum $file | grep -q "$shasum" || \
     { echo "expected $shasum, got $(sha256sum $file)"; exit 13; } && \
     (cd /opt; tar xf /$file) && \
